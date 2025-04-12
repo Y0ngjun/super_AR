@@ -99,17 +99,17 @@ while True:
         line_C_front, _ = cv.projectPoints(boxC_front, rvec, tvec, K, dist_coeff)
         line_C_back, _ = cv.projectPoints(boxC_back, rvec, tvec, K, dist_coeff)
         cv.polylines(img, [np.int32(line_C_front)], True, (255, 0, 0), 2)
-        cv.polylines(img, [np.int32(line_C_back)], True, (0, 0, 255), 2)
         for b, t in zip(line_C_front, line_C_back):
             cv.line(img, np.int32(b.flatten()), np.int32(t.flatten()), (0, 255, 0), 2)
+        cv.polylines(img, [np.int32(line_C_back)], True, (0, 0, 255), 2)
 
         # Draw the V on the image
         line_V_front, _ = cv.projectPoints(boxV_front, rvec, tvec, K, dist_coeff)
         line_V_back, _ = cv.projectPoints(boxV_back, rvec, tvec, K, dist_coeff)
         cv.polylines(img, [np.int32(line_V_front)], True, (255, 0, 0), 2)
-        cv.polylines(img, [np.int32(line_V_back)], True, (0, 0, 255), 2)
         for b, t in zip(line_V_front, line_V_back):
             cv.line(img, np.int32(b.flatten()), np.int32(t.flatten()), (0, 255, 0), 2)
+        cv.polylines(img, [np.int32(line_V_back)], True, (0, 0, 255), 2)
 
         # Print the camera position
         R, _ = cv.Rodrigues(rvec)  # Alternative) `scipy.spatial.transform.Rotation`
